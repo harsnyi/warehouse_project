@@ -24,7 +24,7 @@ class Occupier(models.Model):
 
 class Storage(models.Model):
     name = models.CharField(max_length=255)
-    area = models.IntegerField(validators=[validate_area()])
-    cost = models.IntegerField(validators=[validate_cost()])
+    area = models.IntegerField(validators=[validate_area])
+    cost = models.IntegerField(validators=[validate_cost])
     occupier = models.OneToOneField(Occupier, on_delete=models.CASCADE)
     comment = models.TextField()
