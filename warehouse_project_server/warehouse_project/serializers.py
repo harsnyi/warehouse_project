@@ -16,8 +16,7 @@ class OccupierCreateSerializer(serializers.ModelSerializer):
 class OccupierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Occupier
-        fields = ['id', 'occupier_name', 'address', 'phone_number', 'turning_day', 'payment_method', 'debt',
-                  'refreshed']
+        fields = ['id', 'occupier_name', 'address', 'phone_number', 'turning_day', 'payment_method', 'debt','refreshed']
 
 class OccupierUpdateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,6 +32,11 @@ class StorageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
         fields = ['name', 'area', 'cost', 'occupier', 'comment']
+
+class StorageWithoutOccupierCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Storage
+        fields = ['name', 'area', 'cost','comment']
 
 class StorageSerializer(serializers.ModelSerializer):
     class Meta:

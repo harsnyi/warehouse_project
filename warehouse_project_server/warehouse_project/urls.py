@@ -7,7 +7,8 @@ from .views import (
     UpdateOccupierView,
     DeleteOccupierView,
     AddNewStorageView,
-    GetAllStorageView
+    GetAllStorageView,
+    DeleteStorageView
 )
 
 urlpatterns = [
@@ -17,6 +18,7 @@ urlpatterns = [
     path('updateOccupier/<int:pk>', UpdateOccupierView.as_view(), name='update-occupier'),
     path('deleteOccupier/<int:pk>', DeleteOccupierView.as_view(), name='delete-occupier'),
     path('addNewStorage', AddNewStorageView.as_view(), name='add-new-storage'),
-    path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage')
+    path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage'),
+    path('deleteStorage/<int:pk>', DeleteStorageView.as_view(), name='delete-storage')
 
 ]
