@@ -1,14 +1,16 @@
 from django.urls import path
-from . import views
-from .views import (
-    AddNewOccupierView,
-    GetAllOccupiersView,
-    GetOccupierView,
-    UpdateOccupierView,
+from .views_storage import (
     DeleteOccupierView,
     AddNewStorageView,
     GetAllStorageView,
     DeleteStorageView
+)
+
+from .views_occupiers import (
+    AddNewOccupierView,
+    GetAllOccupiersView,
+    GetOccupierView,
+    UpdateOccupierView,
 )
 
 urlpatterns = [
@@ -20,5 +22,4 @@ urlpatterns = [
     path('addNewStorage', AddNewStorageView.as_view(), name='add-new-storage'),
     path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage'),
     path('deleteStorage/<int:pk>', DeleteStorageView.as_view(), name='delete-storage')
-
 ]
