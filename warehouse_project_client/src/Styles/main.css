@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-size: 62.5%;
+    font-size: 10px;
+    background-color:  rgb(176, 223, 252);
+    color:#03283A;
+    
+}
+
+#addForm{
+    padding: 0.5rem;
+    width: 100%;
+
+    
+}
+
+#eredmenyDiv{
+    margin: 0.3rem;
+    color:#03283A;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+#send{
+    color:#03283A;
+    background-color: #49bf68;
+    
+    
+}
+
+#addForm label{
+    
+    color:#03283A;
+    width: 100%;
+    margin: 0.3rem;
+}
+
+#addForm select{
+    padding: 0.5rem;
+    margin-left: 0.2rem;
+    border-radius: 5px;
+}
+
+#addForm input{
+    margin: 10px;
+    display: block;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    border-radius: 5px;
+    
+    
+}
+
+#frame{
+    background-color:rgba(176, 223, 252, 0);
+    
+}
+
+#wrapper{
+    border: 10px solid #043E62;
+    
+}
+
+#show-berlok{
+    color:#03283A;
+}
+
+#show-berlok:hover{
+    color:black;
+}
+
+#content-holder{
+    background-color:  #B0DFFC;
+    border: 0.4rem solid #043E62;
+    
+}
+
+#main-content{
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#sidebar{
+    background-color:  #B0DFFC;
+    min-height: 100vh;
+    border: 0.4rem solid #043E62;
+    padding: 1rem;
+    background-image: url('./ruhagyar.png');
+    background-size:contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#content-box{
+    
+    background-color:  #C4E7FD;
+    color:#03283A;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    margin-top: 0.1rem;
+    margin-right: 0.1rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#page_title{
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+#content-box:hover{
+    border: 0.2rem solid #043E62;
+    box-shadow: 0.2rem 0.2rem #043E62;
+    
+}
+
+.berlo-box-individual{
+    
+    
+    padding:1%;
+}
+span{
+    font-size: 1.2rem;
+}
+hr{
+    color:#F3F8F2;
+    background-color: #F3F8F2;
+}
+
+#spin{
+    margin:auto;
+    color:#03283A;
+    
+}
+
+.input-area{
+    width: 100%;
+}
+
+#admin-create-content{
+    padding: 10px;
+    display: grid;
+    margin:auto;
+    place-items: center;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-color: #292929;
+    color:#F4F4F4;
+    font-size: 1.2rem;
+}
+#utalasok{
+    border-radius: 10px;
+    padding: 20px;
+    margin: 1%;
+    
+}
+
