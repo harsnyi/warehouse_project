@@ -1,32 +1,29 @@
-
 #delete-button{
     background-color: #f54242;
     margin-top: 1%;
 }
+
 #delete-button2{
     background-color: #f54242;
     margin-top: 1%;
     float: right;
 }
-#update-button{
 
+#update-button{
     margin-top: 1%;
 }
+
 #create-button{
-    
     margin-top: 1%;
 }
+
 #exit-button{
-    
     margin-top: 1%;
 }
-#back-button{
-    
-}
+
 #add-button{
     margin-top: 1%;
 }
-
 
 #update-button:hover,
 #exit-button:hover,
@@ -34,11 +31,9 @@
 #back-button:hover{
     text-decoration: none;
     background-color: #89CFFB;
-    
 }
 #send-button:hover{
     background-color: #89CFFB;
-    
 }
 
 #delete-button:hover{
@@ -47,7 +42,6 @@
 }
 
 .action-button {
-    
     appearance: none;
     background-color: #B0DFFC;
     border: 1px solid rgba(27, 31, 35, .15);
@@ -72,35 +66,34 @@
     transition: 0.3s;
     color:#03283A;
     margin: 0.2rem;
-
-   
 }
-  
+
 .action-button:focus:not(:focus-visible):not(.focus-visible) {
     box-shadow: none;
     outline: none;
 }
-  
+
 .action-button:hover {
     color:#233456;
     background-color: #89CFFB;
 }
+
 .action-button:hover #button-badge{
     color:#F3F8F2;
 }
-  
+
 .action-button:focus {
     box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
     outline: none;
 }
-  
+
 .action-button:disabled {
     background-color: #94d3a2;
     border-color: rgba(27, 31, 35, .1);
     color: rgba(255, 255, 255, .8);
     cursor: default;
 }
-  
+
 .action-button:active {
     background-color: #89CFFB;
     box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
@@ -118,9 +111,6 @@
     height: 3rem;
     border: 0;
     background-color:rgba(176, 223, 252, 0);
-    ;
-    
-
 }
 
 #show-jelenlegi-berlo:hover,
@@ -130,17 +120,14 @@
 #show-ures-raktar:hover,
 #show-berlo-without-raktar:hover,
 #show-messages:hover{
-
-background-color: #89CFFB;
-
+    background-color: #89CFFB;
 }
 
-
 #button-badge{
-
     font-size: 14px;
     float:right;
 }
+
 #button-box{
     float: right;
 }

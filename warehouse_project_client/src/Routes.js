@@ -20,34 +20,24 @@ import DeleteStorage from './Link/DeleteStorage';
 
 function RoutesComponent(){
     return(
-        
         <Routes>
-
         <Route path='/' exact  Component={Home}></Route>
 
-        <Route path='add_occupier' Component={AddOccupier}>
-        </Route>
+        <Route path='add_occupier' Component={AddOccupier}></Route>
 
-        <Route path='add_storage' Component={AddStorage}>
-        </Route>
+        <Route path='add_storage' Component={AddStorage}></Route>
 
-        <Route path='read_excel' Component={ReadExcel}>
-        </Route>
+        <Route path='read_excel' Component={ReadExcel}></Route>
 
-        <Route path='occupiers' Component={Occupiers}>
-        </Route>
+        <Route path='occupiers' Component={Occupiers}></Route>
 
-        <Route path='occupiers_all' Component={OccupiersAll}>
-        </Route>
+        <Route path='occupiers_all' Component={OccupiersAll}></Route>
         
-        <Route path='rented_storage' Component={RentedStorage}>
-        </Route>
+        <Route path='rented_storage' Component={RentedStorage}></Route>
 
-        <Route path='storage_all' Component={StorageAll}>
-        </Route>
+        <Route path='storage_all' Component={StorageAll}></Route>
 
-        <Route path='empty_storage' Component={EmptyStorage}>
-        </Route>
+        <Route path='empty_storage' Component={EmptyStorage}></Route>
         
         <Route path='modify_occupier' Component={ModifyOccupier}></Route>
 
@@ -58,7 +48,6 @@ function RoutesComponent(){
         <Route path='add_occupier_debt' Component={AddOccupierDebt}></Route>
 
         <Route path='delete_occupier' Component={DeleteOccupier}></Route>
-
     </Routes>
 
     );

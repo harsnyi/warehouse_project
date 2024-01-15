@@ -3,8 +3,6 @@ import {NavLink} from "react-router-dom";
 
 function Sidebar(){
     return(
-        
-
         <div className="col-lg-4" id="sidebar">
         <div className="content-section">
             <h1>Tevékenységek</h1>
