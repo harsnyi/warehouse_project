@@ -1,16 +1,16 @@
 from django.urls import path
-from .views_storage import (
-    DeleteOccupierView,
+
+from .views.storage_views import (
     AddNewStorageView,
     GetAllStorageView,
     DeleteStorageView
 )
-
-from .views_occupiers import (
+from .views.occupier_views import (
     AddNewOccupierView,
     GetAllOccupiersView,
     GetOccupierView,
     UpdateOccupierView,
+    DeleteOccupierView
 )
 
 urlpatterns = [

@@ -2,27 +2,13 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Occupier, Storage
-from .serializers import (
+from ..models import Storage, Occupier
+
+from ..serializer.storage_serializer import (
     StorageCreateSerializer,
     StorageSerializer,
     StorageWithoutOccupierCreateSerializer
 )
-
-class DeleteOccupierView(APIView):
-    def delete(self, request, pk):
-        try:
-            occupier = Occupier.objects.get(pk = pk)
-            occupier.delete()
-            success_message = {
-                'message': 'Occupier deleted successfully',
-            }
-            return Response(success_message, status=status.HTTP_200_OK)
-        except Occupier.DoesNotExist:
-            error_message = {
-                'message': 'Occupier not found',
-            }
-            return Response(error_message,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class AddNewStorageView(APIView):
     def post(self, request):
@@ -31,7 +17,6 @@ class AddNewStorageView(APIView):
         serializer_without_occupier = StorageWithoutOccupierCreateSerializer(data = request.data)
 
         if serializer.is_valid():
-
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
@@ -53,14 +38,7 @@ class GetAllStorageView(APIView):
         serializer = StorageSerializer(storages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-
-class GetAllStorageView(APIView):
-    def get(self, request):
-        storages = Storage.objects.all()
-        serializer = StorageSerializer(storages, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
+    
 class DeleteStorageView(APIView):
     def delete(self, request, pk):
         try:

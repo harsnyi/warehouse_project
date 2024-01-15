@@ -1,4 +1,5 @@
 from pathlib import Path
+from .env import API_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0bd^p9$*i5mbd_k#s-j6nr$0!i4_i!77w)-=9!512aiusk_4h)'
+SECRET_KEY = API_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

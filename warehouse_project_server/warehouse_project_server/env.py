@@ -1,0 +1,1 @@
+API_KEY = 'q9+3wse0x@m6aoz@(qzon!#)89$p)vo$jha(l7sfmj&mao8eks'

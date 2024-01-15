@@ -2,11 +2,13 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Occupier, Storage
-from .serializers import (
-    OccupierSerializer,
+from ..models import Occupier
+from datetime import date
+
+from ..serializer.occupier_serializer import (
     OccupierCreateSerializer,
-    OccupierUpdateSerializer,
+    OccupierSerializer,
+    OccupierUpdateSerializer
 )
 
 class AddNewOccupierView(APIView):
@@ -14,6 +16,8 @@ class AddNewOccupierView(APIView):
         serializer = OccupierCreateSerializer(data=request.data)
 
         if serializer.is_valid():
+            refresh_time = date(date.today().year,date.today().month,serializer.validated_data.get('turning_day'))
+            serializer.validated_data['refreshed'] = refresh_time
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         error_response = {
@@ -52,3 +56,19 @@ class UpdateOccupierView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+class DeleteOccupierView(APIView):
+    def delete(self, request, pk):
+        try:
+            occupier = Occupier.objects.get(pk = pk)
+            occupier.delete()
+            success_message = {
+                'message': 'Occupier deleted successfully',
+            }
+            return Response(success_message, status=status.HTTP_200_OK)
+        except Occupier.DoesNotExist:
+            error_message = {
+                'message': 'Occupier not found',
+            }
+            return Response(error_message,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
