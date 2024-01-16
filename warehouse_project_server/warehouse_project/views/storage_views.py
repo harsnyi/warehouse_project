@@ -7,7 +7,6 @@ from ..models import Storage, Occupier
 from ..serializer.storage_serializer import (
     StorageCreateSerializer,
     StorageSerializer,
-    StorageWithoutOccupierSerializer,
     StorageUpdateSerializer
 )
 
@@ -15,18 +14,11 @@ class AddNewStorageView(APIView):
     def post(self, request):
 
         serializer = StorageCreateSerializer(data = request.data)
-        serializer_without_occupier = StorageWithoutOccupierSerializer(data = request.data)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        elif serializer_without_occupier.is_valid():
-            
-            serializer_without_occupier.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
-
         error_response = {
             'message': 'Validation failed',
             'errors': serializer.errors
