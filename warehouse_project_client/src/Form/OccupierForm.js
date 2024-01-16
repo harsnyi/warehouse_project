@@ -11,7 +11,7 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Berlő lakcíme (Irányítószám utca szám):
+            <label>Berlő lakcíme (Irányítószám település, utca szám):
                 <input 
                     type="text" 
                     value={props.address}

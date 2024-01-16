@@ -1,5 +1,5 @@
+import config from '../Config';
 import React from 'react'
-
 import { useState } from 'react';
 import axios from 'axios';
 import OccupierCardSimple from '../Card/OccupierCardSimple';
@@ -14,13 +14,12 @@ function AddOccupier(){
     const [paymentMethod, setPaymentMethod] = useState("");
     const [debt, setDebt] = useState("");
     const [response,setResponse] = useState("");
-
     const handleSubmit = (event) => {
-        
         let payment = (paymentMethod === "Átutalás") ? false : true;
 
         event.preventDefault();
-        axios.post("http://localhost:8000/api/v1/addNewOccupier", {
+        
+        axios.post("http://"+config.ip_address.server_address+":"+config.port+"/addNewOccupier", {
             occupier_name: name,
             address: address,
             phone_number:phoneNumber,
