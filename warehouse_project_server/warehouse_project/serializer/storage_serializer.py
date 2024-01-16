@@ -15,7 +15,7 @@ class StorageCreateSerializer(serializers.ModelSerializer):
 class StorageWithoutOccupierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
-        fields = ['name', 'area', 'cost','comment']
+        fields = ['id','name', 'area', 'cost','comment']
 
 class StorageSerializer(serializers.ModelSerializer):
     occupier = OccupierSerializer()

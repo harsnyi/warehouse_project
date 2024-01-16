@@ -4,6 +4,7 @@ from .views.storage_views import (
     AddNewStorageView,
     GetAllStorageView,
     GetAllEmptyStorageView,
+    GetAllRentedStorageView,
     GetStorageView,
     DeleteStorageView,
 )
@@ -24,6 +25,7 @@ urlpatterns = [
     path('addNewStorage', AddNewStorageView.as_view(), name='add-new-storage'),
     path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage'),
     path('getAllEmptyStorage', GetAllEmptyStorageView.as_view(), name='get-all-empty-storage'),
+    path('getAllRentedStorage', GetAllRentedStorageView.as_view(), name='get-all-rented-storage'),
     path('getStorage/<int:pk>', GetStorageView.as_view(), name='get-storage-by-id'),
     path('deleteStorage/<int:pk>', DeleteStorageView.as_view(), name='delete-storage')
 ]
