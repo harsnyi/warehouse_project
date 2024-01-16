@@ -5,24 +5,23 @@ import StorageCardSimple from '../Card/StorageCardSimple';
 import StorageForm from '../Form/StorageForm';
 
 function AddStorage(){
-    
-    const [helyisegNev, setHelyisegNev] = useState("");
-    const [alapterulet, setAlapterulet] = useState("");
-    const [berletiDij, setBerletiDij] = useState("");
-    const [jelenlegiBerlo, setJelenlegiBerlo] = useState("0");
-    const [megjegyzes, setMegjegyzes] = useState("");
-    const [berlok, setBerlok]  = useState([]);
-    const [responseEredmeny,setResponseEredmeny] = useState("");
+    const [name, setName] = useState("");
+    const [area, setArea] = useState("");
+    const [cost, setCost] = useState("");
+    const [occupier, setOccupier] = useState("0");
+    const [comment, setComment] = useState("");
+    const [fetchedOccupiers, setFetchedOccupiers]  = useState([]);
+    const [response,setResponse] = useState("");
     
     useEffect(() => {
         axios.get("http://localhost:8000/api/v1/getOccupiers")
             .then(response => {
                 console.log(response.data);
-                const fetchedBerlok = response.data.map(item => ({
+                const occupiers = response.data.map(item => ({
                     name: item.occupier_name,
                     id: item.id
                 }));
-                setBerlok(prevBerlok => [...prevBerlok, ...fetchedBerlok]);
+                setFetchedOccupiers(prevOccupiers => [...prevOccupiers, ...occupiers]);
             })
             .catch(function (error) {
                 console.log(error);
@@ -32,26 +31,25 @@ function AddStorage(){
     const handleSubmit = (event) => {
         
         event.preventDefault();
-        console.log(berlok);
+        console.log(fetchedOccupiers);
         axios.post("http://localhost:8000/api/v1/addNewStorage", {
-            name: helyisegNev,
-            area: alapterulet,
-            cost:berletiDij,
-            occupier:jelenlegiBerlo,
-            comment:megjegyzes,
+            name: name,
+            area: area,
+            cost:cost,
+            occupier:occupier,
+            comment:comment,
             
         })
         .then(function (response) {
             console.log(response.status); 
-            setResponseEredmeny("Raktár sikeresen hozzáadva!")
+            setResponse("Raktár sikeresen hozzáadva!")
             
         })
         .catch(function (error) {
             console.log(error);
-            setResponseEredmeny("Sikertelen hozzáadás!")
+            setResponse("Sikertelen hozzáadás!")
         });
     }
-    
     return (
         
         <div className="col-lg-8" id="content-holder">
@@ -60,29 +58,27 @@ function AddStorage(){
             <div className="col-sm-12">
 
                 <StorageForm handleSubmit={handleSubmit}
-                            helyisegNev={helyisegNev}
-                            setHelyisegNev={setHelyisegNev}
-                            alapterulet={alapterulet}
-                            setAlapterulet={setAlapterulet}
-                            berletiDij={berletiDij}
-                            setBerletiDij={setBerletiDij}
-                            setJelenlegiBerlo={setJelenlegiBerlo}
-                            berlok={berlok}
-                            megjegyzes={megjegyzes}
-                            setMegjegyzes={setMegjegyzes}
+                            name={name}
+                            setName={setName}
+                            area={area}
+                            setArea={setArea}
+                            cost={cost}
+                            setCost={setCost}
+                            setOccupier={setOccupier}
+                            fetchedOccupiers={fetchedOccupiers}
+                            comment={comment}
+                            setComment={setComment}
                             submitValue="Raktár hozzáadása"
-                            responseEredmeny={responseEredmeny}/>
-
+                            response={response}/>
                 </div>
             </div>
-            <StorageCardSimple   helyisegNev={helyisegNev}
-                                alapterulet={alapterulet}
-                                berletiDij={berletiDij}
-                                megjegyzes={megjegyzes}
-                                >
+            <StorageCardSimple  name={name}
+                                    area={area}
+                                    cost={cost}
+                                    comment={comment}
+                                    >
             </StorageCardSimple>
-
-        </div>
+            </div>
         </div>
         
     )

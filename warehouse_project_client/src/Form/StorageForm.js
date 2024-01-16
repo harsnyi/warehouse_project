@@ -6,31 +6,31 @@ function StorageForm(props){
             <label>Add meg a helyiség nevét:
                 <input 
                     type="text" 
-                    value={props.helyisegNev}
-                    onChange={(e) => props.setHelyisegNev(e.target.value)}
+                    value={props.name}
+                    onChange={(e) => props.setName(e.target.value)}
                 />
             </label>
 
-            <label>Add meg az alapterületét:
+            <label>Add meg az alapterületét (m<sup>2</sup>):
                 <input 
                     type="number" 
-                    value={props.alapterulet}
-                    onChange={(e) => props.setAlapterulet(e.target.value)}
+                    value={props.area}
+                    onChange={(e) => props.setArea(e.target.value)}
                 />
             </label>
 
-            <label>Add meg a bérleti díját:
+            <label>Add meg a bérleti díját (Ft):
                 <input 
                     type="number" 
-                    value={props.berletiDij}
-                    onChange={(e) => props.setBerletiDij(e.target.value)}
+                    value={props.cost}
+                    onChange={(e) => props.setCost(e.target.value)}
                 />
             </label>
 
             <label>Add meg a Jelenlegi bérlőt:
-                <select onChange={(e) => props.setJelenlegiBerlo(e.target.value)}>
-                    {props.berlok.map(berlo => (
-                        <option value={berlo.id}>{berlo.name}</option>))}
+                <select onChange={(e) => props.setOccupier(e.target.value)}>
+                    {props.fetchedOccupiers.map(occupier => (
+                        <option value={occupier.id}>{occupier.name}</option>))}
                         <option value="0">Jelenleg nincs bérlő</option>
                         
                 </select>
@@ -39,15 +39,12 @@ function StorageForm(props){
             <label>Adj hozzá megjegyzést:
                 <input 
                     type="text" 
-                    value={props.megjegyzes}
-                    onChange={(e) => props.setMegjegyzes(e.target.value)}
+                    value={props.comment}
+                    onChange={(e) => props.setComment(e.target.value)}
                 />
             </label>
-
-        
         <input type="submit" id="send" value="Raktár hozzáadása" />
-
-        <div id="eredmenyDiv">{props.responseEredmeny}</div>
+        <div id="eredmenyDiv">{props.response}</div>
     </form>
     );
 }

@@ -11,7 +11,7 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Berlő lakcíme:
+            <label>Berlő lakcíme (Irányítószám utca szám):
                 <input 
                     type="text" 
                     value={props.address}
@@ -19,7 +19,7 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Bérlő telefonszáma:
+            <label>Bérlő telefonszáma (06...):
                 <input 
                     type="number" 
                     value={props.phoneNumber}
@@ -27,7 +27,7 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Bérlő forduló napja:
+            <label>Bérlő forduló napja (1...30):
                 <input 
                     type="text" 
                     value={props.turningDay}
@@ -35,7 +35,7 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Bérlő tartozása:
+            <label>Bérlő tartozása (Ft):
                 <input 
                     type="number" 
                     value={props.debt}
