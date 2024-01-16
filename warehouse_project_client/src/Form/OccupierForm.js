@@ -11,51 +11,49 @@ function OccupierForm(props){
                 />
             </label>
 
-            <label>Berlő lakcíme:
+            <label>Berlő lakcíme (Irányítószám település, utca szám):
                 <input 
                     type="text" 
-                    value={props.lakcim}
-                    onChange={(e) => props.setLakcim(e.target.value)}
+                    value={props.address}
+                    onChange={(e) => props.setAddress(e.target.value)}
                 />
             </label>
 
-            <label>Bérlő telefonszáma:
+            <label>Bérlő telefonszáma (06...):
                 <input 
                     type="number" 
-                    value={props.telefonszam}
-                    onChange={(e) => props.setTelefonszam(e.target.value)}
+                    value={props.phoneNumber}
+                    onChange={(e) => props.setPhoneNumber(e.target.value)}
                 />
             </label>
 
-            <label>Bérlő forduló napja:
+            <label>Bérlő forduló napja (1...30):
                 <input 
                     type="text" 
-                    value={props.forduloNap}
-                    onChange={(e) => props.setForduloNap(e.target.value)}
+                    value={props.turningDay}
+                    onChange={(e) => props.setTurningDay(e.target.value)}
                 />
             </label>
 
-            <label>Bérlő tartozása:
+            <label>Bérlő tartozása (Ft):
                 <input 
                     type="number" 
-                    value={props.tartozas}
-                    onChange={(e) => props.setTartozas(e.target.value)}
+                    value={props.debt}
+                    onChange={(e) => props.setDebt(e.target.value)}
                 />
             </label>
 
             <label>Bérlő fizetési módja:
             
-                <select value={props.fizetesMod}  onChange={(e) => props.setFizetesMod(e.target.value)}>
+                <select value={props.paymentMethod}  onChange={(e) => props.setPaymentMethod(e.target.value)}>
                     <option value="Átutalás">Átutalás</option>
                     <option value="Készpénz">Készpénz</option>
                 </select>
             
             </label>
 
-    
             <input type="submit" id="send" value={props.submitValue} />
-
-            <div id="eredmenyDiv">{props.responseEredmeny}</div>                   
+            <div id="eredmenyDiv">{props.response}</div>
         </form>
     );
 }

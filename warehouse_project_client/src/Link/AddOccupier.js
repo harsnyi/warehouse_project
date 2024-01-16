@@ -1,5 +1,5 @@
+import config from '../Config';
 import React from 'react'
-
 import { useState } from 'react';
 import axios from 'axios';
 import OccupierCardSimple from '../Card/OccupierCardSimple';
@@ -8,80 +8,71 @@ import OccupierForm from '../Form/OccupierForm';
 function AddOccupier(){
     
     const [name, setName] = useState("");
-    const [lakcim, setLakcim] = useState("");
-    const [telefonszam, setTelefonszam] = useState("");
-    const [forduloNap, setForduloNap] = useState("");
-    const [fizetesMod, setFizetesMod] = useState("");
-    const [tartozas, setTartozas] = useState("");
-    const [responseEredmeny,setResponseEredmeny] = useState("");
-
+    const [address, setAddress] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [turningDay, setTurningDay] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("");
+    const [debt, setDebt] = useState("");
+    const [response,setResponse] = useState("");
     const handleSubmit = (event) => {
-        
-        let fizetes = (fizetesMod === "Átutalás") ? false : true;
+        let payment = (paymentMethod === "Átutalás") ? false : true;
 
         event.preventDefault();
-        axios.post("http://localhost:8000/api/v1/addNewOccupier", {
+        
+        axios.post("http://"+config.ip_address.server_address+":"+config.port+"/addNewOccupier", {
             occupier_name: name,
-            address: lakcim,
-            phone_number:telefonszam,
-            turning_day:forduloNap,
-            payment_method:fizetes,
-            debt:tartozas,
-            
+            address: address,
+            phone_number:phoneNumber,
+            turning_day:turningDay,
+            payment_method:payment,
+            debt:debt,
         })
         .then(function () {
-            setResponseEredmeny("Bérlő sikeresen hozzáadva!");
-
+            setResponse("Bérlő sikeresen hozzáadva!");
             setName("");
-            setLakcim("");
-            setTelefonszam("");
-            setForduloNap("");
-            setFizetesMod("");
-            setTartozas("");
+            setAddress("");
+            setPhoneNumber("");
+            setTurningDay("");
+            setPaymentMethod("");
+            setDebt("");
         })
         .catch(function (e) {
-            
             console.error("Error adding occupier:", e);
-            setResponseEredmeny("Sikertelen hozzáadás!")
+            setResponse("Sikertelen hozzáadás!")
         });
     }
     
     return (
-        
         <div className="col-lg-8" id="content-holder">
             <div id="main-content">
                 <div className='row'>
                     <div className="col-sm-12">
-                        
                         <OccupierForm  handleSubmit={handleSubmit}
                                     name={name}
                                     setName={setName}
-                                    lakcim={lakcim}
-                                    setLakcim={setLakcim}
-                                    telefonszam={telefonszam}
-                                    setTelefonszam={setTelefonszam}
-                                    forduloNap={forduloNap}
-                                    setForduloNap={setForduloNap}
-                                    tartozas={tartozas}
-                                    setTartozas={setTartozas}
-                                    fizetesMod={fizetesMod}
-                                    setFizetesMod={setFizetesMod}
+                                    address={address}
+                                    setAddress={setAddress}
+                                    phoneNumber={phoneNumber}
+                                    setPhoneNumber={setPhoneNumber}
+                                    turningDay={turningDay}
+                                    setTurningDay={setTurningDay}
+                                    debt={debt}
+                                    setDebt={setDebt}
+                                    paymentMethod={paymentMethod}
+                                    setPaymentMethod={setPaymentMethod}
                                     submitValue="Bérlő hozzáadása"
-                                    responseEredmeny={responseEredmeny}/>
+                                    response={response}/>
                     </div>
                 </div>
-            
                 <OccupierCardSimple     name={name}
-                                    tartozas={tartozas}
-                                    telefonszam={telefonszam}
-                                    lakcim={lakcim}
-                                    forduloNap={forduloNap}>
+                                    debt={debt}
+                                    phoneNumber={phoneNumber}
+                                    address={address}
+                                    turningDay={turningDay}>
                 </OccupierCardSimple>                                   
-
             </div>
         </div>
         
     )
 }
-
 export default AddOccupier;
