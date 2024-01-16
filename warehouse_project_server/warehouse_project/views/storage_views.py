@@ -37,7 +37,16 @@ class GetAllStorageView(APIView):
         storages = Storage.objects.all()
         serializer = StorageSerializer(storages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
+class GetStorageView(APIView):
+    def get(self, request, pk):
+        try:
+            storage = Storage.objects.get(pk=pk)
+        except Storage.DoesNotExist:
+            return Response({'error': 'No such storage'}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = StorageSerializer(storage)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 class DeleteStorageView(APIView):
     def delete(self, request, pk):
