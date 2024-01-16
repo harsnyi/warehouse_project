@@ -7,14 +7,14 @@ from ..models import Storage, Occupier
 from ..serializer.storage_serializer import (
     StorageCreateSerializer,
     StorageSerializer,
-    StorageWithoutOccupierCreateSerializer
+    StorageWithoutOccupierSerializer
 )
 
 class AddNewStorageView(APIView):
     def post(self, request):
 
         serializer = StorageCreateSerializer(data = request.data)
-        serializer_without_occupier = StorageWithoutOccupierCreateSerializer(data = request.data)
+        serializer_without_occupier = StorageWithoutOccupierSerializer(data = request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -38,6 +38,12 @@ class GetAllStorageView(APIView):
         serializer = StorageSerializer(storages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+class GetAllEmptyStorageView(APIView):
+    def get(self, request):
+        storages = Storage.objects.filter(occupier = None)
+        serializer = StorageWithoutOccupierSerializer(storages, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class GetStorageView(APIView):
     def get(self, request, pk):
         try:

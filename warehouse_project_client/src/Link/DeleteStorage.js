@@ -1,33 +1,28 @@
 import config from '../Config';
 import React from 'react'
 import { useState,useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import { useLocation} from "react-router-dom"
 
 function DeleteStorage(){
-    const [helyisegNev, setHelyisegNev] = useState("");
-    const [alapterulet, setAlapterulet] = useState("");
-    const [berletiDij, setBerletiDij] = useState("");
-    const [jelenlegiBerlo, setJelenlegiBerlo] = useState("");
-    const [megjegyzes, setMegjegyzes] = useState("");
-    const [responseEredmeny,setResponseEredmeny] = useState("");
+    const [name, setName] = useState("");
+    const [area, setArea] = useState("");
+    const [cost, setCost] = useState("");
+    const [occupier, setOccupier] = useState("");
+    const [comment, setComment] = useState("");
+    const [response,setResponse] = useState("");
     const [showButton, setShowButton] = useState(true);
     
     let location = useLocation();
 
     useEffect(() => {
-        axios.get("http://"+global.config.ip_address.host.server_address+":"+global.config.ip_address.host.port+"/getRaktar/" + location.state.raktarId)
+        axios.get(`http://${config.ip_address.server_address}:${config.port}/getStorage/${location.state.storageId}`)
         .then(response => {
-            
-            setHelyisegNev(response.data.raktar.helyisegNev);
-            setAlapterulet(response.data.raktar.alapterulet);
-            setBerletiDij(response.data.raktar.berletiDij);
-            setMegjegyzes(response.data.raktar.megjegyzes);
-            setJelenlegiBerlo(response.data.berloNev);
-            
-            
-
+            setName(response.data.name);
+            setArea(response.data.area);
+            setCost(response.data.cost);
+            setComment(response.data.comment);
+            setOccupier(response.data.occupier.occupier_name ? response.data.occupier.occupier_name : "Jelenleg nincs bérlő");
         })
         .catch(function (error) {
             console.log(error);
@@ -35,31 +30,23 @@ function DeleteStorage(){
     },[]);
 
     const handleSubmit = (event) => {
-        
+
         event.preventDefault();
-        axios.delete("http://"+global.config.ip_address.host.server_address+":"+global.config.ip_address.host.port+"/deleteRaktar/" + location.state.raktarId, {
-            
-            
+        axios.delete(`http://${config.ip_address.server_address}:${config.port}/deleteStorage/${location.state.storageId}`, {
         })
         .then(function () {
-            
-            setResponseEredmeny("Raktár sikeresen törölve!");
+            setResponse("Raktár sikeresen törölve!");
             setShowButton(false);
-
         })
         .catch(function () {
-
-            setResponseEredmeny("Sikertelen törlés")
+            setResponse("Sikertelen törlés")
         });
-        
-        setHelyisegNev("");
-        setAlapterulet("");
-        setBerletiDij("");
-        setMegjegyzes("");
-        setJelenlegiBerlo("");
-        
+        setName();
+        setArea("");
+        setCost("");
+        setComment("");
+        setOccupier("");
     }
-
     return (
         
         <div className="col-lg-8" id="content-holder">
@@ -67,33 +54,27 @@ function DeleteStorage(){
                 <div className='row'>
                     <div className="col-sm-12">
                         <form  id="addForm" onSubmit={handleSubmit}>
-                    
+
                             <label>Szeretnéd törölni ezt a raktárat?</label>
                             {showButton &&  <input type="submit" id="send" value="Raktár törlése" /> }
 
-                            <div id="eredmenyDiv">{responseEredmeny}</div>
+                            <div id="eredmenyDiv">{response}</div>
                         </form>
                     </div>
                 </div>
-                
                 <div className="col-sm-6">
                     <div className="card" id="content-box">
                         <div className="card-body">
-                            
-                            <h5 className="card-title">{helyisegNev}</h5>
-                            
-                            <h6 className="card-subtitle mb-2">Jelenlegi bérlő: {jelenlegiBerlo}</h6> 
-                            <h6>Alapterület: {alapterulet} m<sup>2</sup></h6>                                    
-                            <h6>Bérleti díj: {berletiDij } Ft</h6>     
-                            <h6>Megjegyzés: {megjegyzes }</h6>   
-                                        
+                            <h5 className="card-title">{name}</h5>
+                            <h6 className="card-subtitle mb-2">Jelenlegi bérlő: {occupier}</h6> 
+                            <h6>Alapterület: {area} m<sup>2</sup></h6>
+                            <h6>Bérleti díj: {cost } Ft</h6>
+                            <h6>Megjegyzés: {comment }</h6>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     )
 }
-
 export default DeleteStorage;

@@ -34,7 +34,7 @@ function StorageAll() {
                                 <StorageCard
                                     key={storage.id}
                                     name={storage.name}
-                                    occupierName={storage.occupier ? storage.occupier.occupier_name : "No occupier"}
+                                    occupierName={storage.occupier.occupier_name ? storage.occupier.occupier_name : "Jelenleg nincs bérlő"}
                                     area={storage.area}
                                     cost={storage.cost}
                                     comment={storage.comment}

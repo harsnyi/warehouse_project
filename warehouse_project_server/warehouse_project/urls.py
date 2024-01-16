@@ -3,8 +3,9 @@ from django.urls import path
 from .views.storage_views import (
     AddNewStorageView,
     GetAllStorageView,
+    GetAllEmptyStorageView,
     GetStorageView,
-    DeleteStorageView
+    DeleteStorageView,
 )
 from .views.occupier_views import (
     AddNewOccupierView,
@@ -22,6 +23,7 @@ urlpatterns = [
     path('deleteOccupier/<int:pk>', DeleteOccupierView.as_view(), name='delete-occupier'),
     path('addNewStorage', AddNewStorageView.as_view(), name='add-new-storage'),
     path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage'),
+    path('getAllEmptyStorage', GetAllEmptyStorageView.as_view(), name='get-all-empty-storage'),
     path('getStorage/<int:pk>', GetStorageView.as_view(), name='get-storage-by-id'),
     path('deleteStorage/<int:pk>', DeleteStorageView.as_view(), name='delete-storage')
 ]

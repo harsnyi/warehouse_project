@@ -12,7 +12,7 @@ class StorageCreateSerializer(serializers.ModelSerializer):
         model = Storage
         fields = ['name', 'area', 'cost', 'occupier', 'comment']
 
-class StorageWithoutOccupierCreateSerializer(serializers.ModelSerializer):
+class StorageWithoutOccupierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
         fields = ['name', 'area', 'cost','comment']
