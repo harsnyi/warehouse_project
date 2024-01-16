@@ -8,6 +8,7 @@ class OccupierCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         occupier_name = validated_data.get('occupier_name')
+        
         if Occupier.objects.filter(occupier_name=occupier_name).exists():
             raise serializers.ValidationError({'occupier_name': 'Occupier with this name already exists.'})
 

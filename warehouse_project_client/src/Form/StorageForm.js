@@ -28,7 +28,7 @@ function StorageForm(props){
             </label>
 
             <label>Add meg a Jelenlegi bérlőt:
-                <select onChange={(e) => props.setOccupier(e.target.value)}>
+                <select value = {props.occupier} onChange={(e) => props.setOccupier(e.target.value)}>
                     {props.fetchedOccupiers.map(occupier => (
                         <option value={occupier.id}>{occupier.name}</option>))}
                         <option value="0">Jelenleg nincs bérlő</option>

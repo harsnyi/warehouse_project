@@ -7,25 +7,18 @@ from ..models import Storage, Occupier
 from ..serializer.storage_serializer import (
     StorageCreateSerializer,
     StorageSerializer,
-    StorageWithoutOccupierSerializer
+    StorageUpdateSerializer
 )
 
 class AddNewStorageView(APIView):
     def post(self, request):
 
         serializer = StorageCreateSerializer(data = request.data)
-        serializer_without_occupier = StorageWithoutOccupierSerializer(data = request.data)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        elif serializer_without_occupier.is_valid():
-            
-            serializer_without_occupier.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
-
         error_response = {
             'message': 'Validation failed',
             'errors': serializer.errors
@@ -59,6 +52,21 @@ class GetStorageView(APIView):
         
         serializer = StorageSerializer(storage)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class UpdateStorageView(APIView):
+    def put(self, request, pk):
+        try:
+            storage = Storage.objects.get(pk=pk)
+        except Storage.DoesNotExist:
+            return Response({'error': 'Storage not found'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        serializer = StorageUpdateSerializer(storage, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 class DeleteStorageView(APIView):
     def delete(self, request, pk):

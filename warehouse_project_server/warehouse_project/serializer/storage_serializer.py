@@ -1,21 +1,21 @@
 from rest_framework import serializers
-from ..models import Storage, Occupier
+from ..models import Storage
 from .occupier_serializer import OccupierSerializer
 
-class StorageCreateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Occupier
-        fields = ['occupier_name', 'address', 'phone_number', 'turning_day', 'payment_method', 'debt', 'refreshed']
 
 class StorageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
         fields = ['name', 'area', 'cost', 'occupier', 'comment']
+    
+    def create(self, validated_data):
+        name = validated_data.get('name')
+        
+        if Storage.objects.filter(name=name).exists():
+            raise serializers.ValidationError({'name': 'Storage with this name already exists.'})
 
-class StorageWithoutOccupierSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Storage
-        fields = ['id','name', 'area', 'cost','comment']
+        return Storage.objects.create(**validated_data)
+        
 
 class StorageSerializer(serializers.ModelSerializer):
     occupier = OccupierSerializer()
@@ -31,3 +31,8 @@ class StorageSerializer(serializers.ModelSerializer):
         
         return representation
     
+
+class StorageUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Storage
+        fields = ['name', 'area', 'cost', 'occupier', 'comment']

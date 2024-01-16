@@ -7,6 +7,7 @@ from .views.storage_views import (
     GetAllRentedStorageView,
     GetStorageView,
     DeleteStorageView,
+    UpdateStorageView
 )
 from .views.occupier_views import (
     AddNewOccupierView,
@@ -27,5 +28,6 @@ urlpatterns = [
     path('getAllEmptyStorage', GetAllEmptyStorageView.as_view(), name='get-all-empty-storage'),
     path('getAllRentedStorage', GetAllRentedStorageView.as_view(), name='get-all-rented-storage'),
     path('getStorage/<int:pk>', GetStorageView.as_view(), name='get-storage-by-id'),
+    path('updateStorage/<int:pk>', UpdateStorageView.as_view(), name='update-storage'),
     path('deleteStorage/<int:pk>', DeleteStorageView.as_view(), name='delete-storage')
 ]

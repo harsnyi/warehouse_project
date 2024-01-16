@@ -30,14 +30,15 @@ function AddStorage(){
     }, []);
 
     const handleSubmit = (event) => {
-        
         event.preventDefault();
+        
+        let oc = occupier == "0" ? null : occupier; 
         console.log(fetchedOccupiers);
         axios.post(`http://${config.ip_address.server_address}:${config.port}/addNewStorage`, {
             name: name,
             area: area,
             cost:cost,
-            occupier:occupier,
+            occupier:oc,
             comment:comment,
             
         })
