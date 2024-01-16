@@ -11,11 +11,11 @@ function AddOccupier(){
     const [address, setAddress] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [turningDay, setTurningDay] = useState("");
-    const [paymentMethod, setPaymentMethod] = useState("");
+    const [paymentMethod, setPaymentMethod] = useState("Átutalás");
     const [debt, setDebt] = useState("");
     const [response,setResponse] = useState("");
     const handleSubmit = (event) => {
-        let payment = (paymentMethod === "Átutalás") ? false : true;
+        let payment = (paymentMethod === "Átutalás") ? true : false;
 
         event.preventDefault();
         
@@ -69,7 +69,7 @@ function AddOccupier(){
                                     phoneNumber={phoneNumber}
                                     address={address}
                                     turningDay={turningDay}>
-                </OccupierCardSimple>                                   
+                </OccupierCardSimple>
             </div>
         </div>
         

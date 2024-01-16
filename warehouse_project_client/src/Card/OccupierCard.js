@@ -7,6 +7,9 @@ function OccupierCard(props){
             <div key={props.id} className="card" id="content-box">
                 <div className="card-body">
                     <h5 className="card-title">{props.occupierName}</h5>
+                    <>
+                    {props.storageName == null ?  null : <h6 className="card-subtitle mb-2">Bérelt raktár: {props.storageName}</h6>}
+                    </>
                     <h6 className="card-subtitle mb-2">Jelenlegi tartozás: {props.debt} Ft</h6>
                     <h6>Bérlő id: {props.id}</h6>
                     <h6>Telefonszám: { props.phoneNumber }</h6>
