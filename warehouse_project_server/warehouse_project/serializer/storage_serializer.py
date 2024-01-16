@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from ..models import Storage, Occupier
+from .occupier_serializer import OccupierSerializer
 
 class StorageCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,12 +12,22 @@ class StorageCreateSerializer(serializers.ModelSerializer):
         model = Storage
         fields = ['name', 'area', 'cost', 'occupier', 'comment']
 
-class StorageWithoutOccupierCreateSerializer(serializers.ModelSerializer):
+class StorageWithoutOccupierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Storage
-        fields = ['name', 'area', 'cost','comment']
+        fields = ['id','name', 'area', 'cost','comment']
 
 class StorageSerializer(serializers.ModelSerializer):
+    occupier = OccupierSerializer()
     class Meta:
         model = Storage
-        fields = ['name', 'area', 'cost', 'occupier', 'comment']
+        fields = ['id','name', 'area', 'cost','occupier','comment']
+        
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        if representation['occupier'] is None:
+            representation['occupier'] = "Jelenleg nincs bérlője"
+        
+        return representation
+    

@@ -15,7 +15,7 @@ function AddStorage(){
     const [response,setResponse] = useState("");
     
     useEffect(() => {
-        axios.get("http://"+config.ip_address.server_address+":"+config.port+"/getOccupiers")
+        axios.get(`http://${config.ip_address.server_address}:${config.port}/getOccupiers`)
             .then(response => {
                 console.log(response.data);
                 const occupiers = response.data.map(item => ({
@@ -33,7 +33,7 @@ function AddStorage(){
         
         event.preventDefault();
         console.log(fetchedOccupiers);
-        axios.post("http://"+config.ip_address.server_address+":"+config.port+"/addNewStorage", {
+        axios.post(`http://${config.ip_address.server_address}:${config.port}/addNewStorage`, {
             name: name,
             area: area,
             cost:cost,

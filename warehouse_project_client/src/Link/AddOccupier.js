@@ -19,7 +19,7 @@ function AddOccupier(){
 
         event.preventDefault();
         
-        axios.post("http://"+config.ip_address.server_address+":"+config.port+"/addNewOccupier", {
+        axios.post(`http://${config.ip_address.server_address}:${config.port}/addNewOccupier`, {
             occupier_name: name,
             address: address,
             phone_number:phoneNumber,
