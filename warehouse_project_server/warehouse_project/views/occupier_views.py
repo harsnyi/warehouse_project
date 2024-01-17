@@ -6,6 +6,7 @@ from rest_framework.parsers import JSONParser
 from ..models import Occupier
 from datetime import date
 from json.decoder import JSONDecodeError
+import pandas as pd
 
 from ..serializer.occupier_serializer import (
     OccupierCreateSerializer,
@@ -96,3 +97,39 @@ class DeleteOccupierView(APIView):
             }
             return Response(error_message,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class UploadExcelView(APIView):
+    def post(self, request):
+        found_occupiers = []
+        excel_file = request.FILES.get('file')
+        df = pd.read_excel(excel_file)
+        
+        for _, row in df.iterrows():
+            for occupier in Occupier.objects.all():
+                if not pd.isna(row['Partner elnevezése']) and  (occupier.occupier_name.lower() == row['Partner elnevezése'].lower()):
+                    partner = {
+                        "name": row['Partner elnevezése'],
+                        "date": row['Könyvelés dátuma'].to_pydatetime().date().strftime('%Y-%m-%d'),
+                        "total": row['Összeg'],
+                        "comment": row['Közlemény']
+                    }
+                    found_occupiers.append(partner)
+        
+        return Response(found_occupiers, status=status.HTTP_202_ACCEPTED)
+
+class UpdateDebtView(APIView):
+    def post(self, request):
+        occupiers = request.data
+        
+        try:
+            for occupier in occupiers:
+                name = occupier.get('name')
+                print(name)
+                
+        
+            success_message = {
+                    'message': 'Occupier deleted successfully',
+                }
+            return Response(success_message, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': e}, status=status.HTTP_400_BAD_REQUEST)
+        
