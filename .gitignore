@@ -35,3 +35,13 @@ env.py
 /env.*
 
 env.*
+
+/Config.js
+
+Config.js
+
+/.Config.js
+
+warehouse_project_client/src/Config.js
+
+/warehouse_project_client/src/Config.js
