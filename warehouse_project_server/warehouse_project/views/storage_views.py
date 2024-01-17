@@ -34,7 +34,7 @@ class GetAllStorageView(APIView):
 class GetAllEmptyStorageView(APIView):
     def get(self, request):
         storages = Storage.objects.filter(occupier = None)
-        serializer = StorageWithoutOccupierSerializer(storages, many=True)
+        serializer = StorageSerializer(storages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class GetAllRentedStorageView(APIView):

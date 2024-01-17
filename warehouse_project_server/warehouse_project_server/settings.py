@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_cron',
     'warehouse_project.apps.WarehouseProjectConfig'
 ]
 
@@ -58,6 +59,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+CRON_CLASSES = [
+    'warehouse_project_server.tasks.UpdateDebt',
 ]
 
 WSGI_APPLICATION = 'warehouse_project_server.wsgi.application'
