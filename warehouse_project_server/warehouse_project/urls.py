@@ -14,7 +14,8 @@ from .views.occupier_views import (
     GetAllOccupiersView,
     GetOccupierView,
     UpdateOccupierView,
-    DeleteOccupierView
+    DeleteOccupierView,
+    UpdateOccupierDebtView
 )
 
 urlpatterns = [
@@ -22,6 +23,7 @@ urlpatterns = [
     path('getOccupiers', GetAllOccupiersView.as_view(), name='get-all-occupiers'),
     path('getOccupier/<int:pk>', GetOccupierView.as_view(), name='get-occupier-by-id'),
     path('updateOccupier/<int:pk>', UpdateOccupierView.as_view(), name='update-occupier'),
+    path('updateOccupierDebt/<int:pk>',UpdateOccupierDebtView.as_view(),name='update-occupier-debt'),
     path('deleteOccupier/<int:pk>', DeleteOccupierView.as_view(), name='delete-occupier'),
     path('addNewStorage', AddNewStorageView.as_view(), name='add-new-storage'),
     path('getAllStorage', GetAllStorageView.as_view(), name='get-all-storage'),

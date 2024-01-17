@@ -23,3 +23,4 @@ class OccupierUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Occupier
         fields = ['occupier_name', 'address', 'phone_number', 'turning_day', 'payment_method','debt', 'refreshed']
+        

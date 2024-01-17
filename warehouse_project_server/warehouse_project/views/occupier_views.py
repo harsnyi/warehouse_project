@@ -2,13 +2,15 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import JSONParser
 from ..models import Occupier
 from datetime import date
+from json.decoder import JSONDecodeError
 
 from ..serializer.occupier_serializer import (
     OccupierCreateSerializer,
     OccupierSerializer,
-    OccupierUpdateSerializer
+    OccupierUpdateSerializer,
 )
 
 class AddNewOccupierView(APIView):
@@ -56,7 +58,29 @@ class UpdateOccupierView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
+class UpdateOccupierDebtView(APIView):
+    def put(self, request, pk):
+        try:
+            occupier = Occupier.objects.get(pk=pk)
+        except Occupier.DoesNotExist:
+            return Response({'error': 'Occupier not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            data = JSONParser().parse(request)
+            booked_value = int(data.get('booked'))
+            
+            if booked_value is not None:
+                occupier.debt -= booked_value
+                occupier.save()
+
+                serializer = OccupierSerializer(occupier)
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            else:
+                return Response({'error': 'Key "booked" not found in JSON data'}, status=status.HTTP_400_BAD_REQUEST)
+
+        except JSONDecodeError:
+            return Response({'error': 'Invalid JSON data'}, status=status.HTTP_400_BAD_REQUEST)
 class DeleteOccupierView(APIView):
     def delete(self, request, pk):
         try:
