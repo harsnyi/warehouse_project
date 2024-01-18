@@ -1,5 +1,3 @@
-# your_app/cron.py
-
 from django_cron import CronJobBase, Schedule
 from warehouse_project.models import Storage
 from datetime import date

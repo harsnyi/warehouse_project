@@ -26,5 +26,9 @@ class Storage(models.Model):
     name = models.CharField(max_length=255)
     area = models.IntegerField(validators=[validate_area])
     cost = models.IntegerField(validators=[validate_cost])
-    occupier = models.OneToOneField(Occupier, on_delete=models.SET_NULL,null=True, blank=True)
+    occupier = models.ForeignKey(Occupier, on_delete=models.SET_NULL,null=True, blank=True)
     comment = models.TextField()
+
+class DebtLog(models.Model):
+    occupier = models.ForeignKey(Occupier, on_delete=models.CASCADE,null=True, blank=True)
+    booked = models.DateField()

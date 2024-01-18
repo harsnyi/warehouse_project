@@ -41,7 +41,7 @@ function ModifyStorage(){
             setCost(response.data.cost);
             setComment(response.data.comment);
 
-            if(response.data.occupier == "Jelenleg nincs bérlője"){
+            if(response.data.occupier === "Jelenleg nincs bérlője"){
                 setOccupier("0");
             }
             else{
@@ -57,7 +57,7 @@ function ModifyStorage(){
     const handleSubmit = (event) => {
         
         event.preventDefault();
-        let oc = occupier == "0" ? null : occupier; 
+        let oc = occupier === "0" ? null : occupier; 
         axios.put(`http://${config.ip_address.server_address}:${config.port}/updateStorage/${location.state.storageId}`, {
             name: name,
             area: area,
