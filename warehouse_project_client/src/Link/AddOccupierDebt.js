@@ -3,7 +3,6 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useLocation} from "react-router-dom"
-import OccupierCardSimple from '../Card/OccupierCardSimple';
 
 function AddOccupierDebt(){
     
@@ -11,9 +10,7 @@ function AddOccupierDebt(){
     const [address, setAddress] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [turningDay, setTurningDay] = useState("");
-    const [paymentMethod, setPaymentMethod] = useState("Átutalás");
     const [debt, setDebt] = useState("");
-    const [refreshed, setRefreshed] = useState("")
     const [response,setResponse] = useState("");
     const [showButton, setShowButton] = useState(true);
     const [booked, setBooked] = useState(0);
@@ -28,9 +25,7 @@ function AddOccupierDebt(){
             setAddress(response.data.address);
             setPhoneNumber(response.data.phone_number);
             setTurningDay(response.data.turning_day);
-            setPaymentMethod(response.data.payment_method ? "Átutalás" : "Készpénz")
             setDebt(response.data.debt);
-            setRefreshed(response.data.refreshed)
         });
     },[]);
 
@@ -54,7 +49,6 @@ function AddOccupierDebt(){
         setAddress("");
         setPhoneNumber("");
         setTurningDay("");
-        setPaymentMethod("");
         setDebt("");
     }
     
@@ -86,16 +80,16 @@ function AddOccupierDebt(){
             </div>
                 <div className="col-sm-6">
                     <div className="card" id="content-box">
-                                    <div className="card-body">
-                                    <h5 className="card-title">{name}</h5>
-                                            <h6 className="card-subtitle mb-2">Jelenlegi tartozás: {debt} Ft</h6>
-                                        <h6>Telefonszám: { phoneNumber }</h6>
-                                        <h6>Elérhetőség: { address }</h6>
-                                        <h6>Forduló nap: { turningDay }</h6>
-                                    </div>
-                                </div>
-                                </div>
-                                </div>
+                        <div className="card-body">
+                            <h5 className="card-title">{name}</h5>
+                            <h6 className="card-subtitle mb-2">Jelenlegi tartozás: {debt} Ft</h6>
+                            <h6>Telefonszám: { phoneNumber }</h6>
+                            <h6>Elérhetőség: { address }</h6>
+                            <h6>Forduló nap: { turningDay }</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
     )

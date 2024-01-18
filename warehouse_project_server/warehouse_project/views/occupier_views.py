@@ -3,10 +3,11 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
-from ..models import Occupier
-from datetime import date
+from ..models import Occupier, DebtLog
+from datetime import date, datetime
 from json.decoder import JSONDecodeError
 import pandas as pd
+from django.db import IntegrityError
 
 from ..serializer.occupier_serializer import (
     OccupierCreateSerializer,
@@ -119,17 +120,48 @@ class UploadExcelView(APIView):
 class UpdateDebtView(APIView):
     def post(self, request):
         occupiers = request.data
+        occupiers_modified = []
         
         try:
             for occupier in occupiers:
                 name = occupier.get('name')
-                print(name)
+                total = occupier.get('total')
+                date = datetime.strptime(occupier.get('date'), "%Y-%m-%d").date()
                 
+                try:
+                    oc = Occupier.objects.get(occupier_name__icontains = name)
+                    try:
+                        existing_log = DebtLog.objects.get(occupier=oc, booked=date)
+                    except DebtLog.DoesNotExist:
+                        existing_log = None
+                    
+                    if existing_log is not None:
+                        partner = {
+                        "name": name,
+                        "total": total,
+                        "comment": "Már levonásra került"
+                    } 
+                    else:
+                        oc.debt -= int(occupier.get('total'))
+                        logged_occupier = DebtLog(booked = date, occupier = oc)
+                        logged_occupier.save()
+                        oc.save()
+                        partner = {
+                            "name": name,
+                            "total": total,
+                            "comment": "Sikeresen levonva"
+                        }
+                    occupiers_modified.append(partner)
+                    
+                except IntegrityError as e:
+                    error_message = f'IntegrityError: {str(e)}'
+                    return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
+
+                except Exception as e:
+                    return Response({'error': e}, status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(occupiers_modified, status=status.HTTP_200_OK)
         
-            success_message = {
-                    'message': 'Occupier deleted successfully',
-                }
-            return Response(success_message, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': e}, status=status.HTTP_400_BAD_REQUEST)
         

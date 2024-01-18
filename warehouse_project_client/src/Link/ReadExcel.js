@@ -8,7 +8,7 @@ function ReadExcel(){
     const [result,setResult] = useState("");
     const [selectedFile,setSelectedFile] = useState(null);
     const [response,setResponse] = useState([]);
-    const [bookedFail,setBookedFail] = useState([]);
+    const [modifiedOccupiers,setModifiedOccupiers] = useState([]);
     const [showButton, setShowButton] = useState(false);
     const [showUpload, setShowUpload] = useState(true);
 
@@ -61,11 +61,11 @@ function ReadExcel(){
                 
             })
             .then(function (response) {
+                console.log(response.data);
                 console.log(response.status);
                 setShowButton(false);
-                bookedFail(response.data);
-                console.log(response.data);
-                
+                setModifiedOccupiers(response.data);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -117,8 +117,9 @@ function ReadExcel(){
                             {showButton && <button id="send" onClick={paymentRefresh} className="action-button">Tartozás levonása</button>}
 
                             <div>
-                                {bookedFail.map((element, index) => (
-                                <h5 id="eredmenyDiv" key={index}>{element}</h5>
+                                {!showUpload && !showButton && <h3 className="card-title">Műveletek: </h3>}
+                                {modifiedOccupiers.map((element, index) => (
+                                <span id="eredmenyDiv" key={index}>{element.name} : {element.total} Ft : {element.comment}<br/></span>
                                 ))}
                             </div>
 
