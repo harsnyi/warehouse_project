@@ -124,9 +124,11 @@ class UpdateDebtView(APIView):
         
         try:
             for occupier in occupiers:
-                name = occupier.get('name')
+                name = occupier.get('name').lower()
                 total = occupier.get('total')
                 date = datetime.strptime(occupier.get('date'), "%Y-%m-%d").date()
+                
+                print(f"{name} {total} {date}")
                 
                 try:
                     oc = Occupier.objects.get(occupier_name__icontains = name)
@@ -153,6 +155,9 @@ class UpdateDebtView(APIView):
                         }
                     occupiers_modified.append(partner)
                     
+                except Occupier.DoesNotExist:
+                        oc = None
+                
                 except IntegrityError as e:
                     error_message = f'IntegrityError: {str(e)}'
                     return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)

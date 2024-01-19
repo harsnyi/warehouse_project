@@ -1,21 +1,10 @@
 from pathlib import Path
-from .env import API_KEY
+from .env import API_KEY, ALLOWED_ORIGIN, ALLOWED_HOST
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = API_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEBUG = False
+ALLOWED_HOSTS = ALLOWED_HOST
 
 # Application definition
 
@@ -120,6 +109,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
+    ALLOWED_ORIGIN
 ]
 CORS_ALLOW_CREDENTIALS = True
