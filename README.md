@@ -1,6 +1,6 @@
 # warehouse_project
 
-warehouse_project is a fullstack web application for SMART-STORE KFT. located in 6600 Szentes, 6600 Szentes, Rákóczi Ferenc utca 132. The application features a 
+warehouse_project is a fullstack web application for SMART-STORE KFT. located in 6600 Szentes, Rákóczi Ferenc utca 132. The application features a 
  - client-side written in React
  - server-side written in Python Django.
 
