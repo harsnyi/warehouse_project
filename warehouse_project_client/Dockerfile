@@ -18,3 +18,4 @@ RUN npm run build
 
 # Set the command to start the React app
 CMD ["npm", "start"]
+
