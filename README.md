@@ -23,6 +23,7 @@ cd warehouse_project_client
 npm install
 npm start
 ```
+
 ### Server
 
 For the server, you will need a pip envinroment with the required packages located in the server's root folder, and an env.py file with the following keys:
@@ -35,3 +36,25 @@ For the server, you will need a pip envinroment with the required packages locat
 pip install -r requirements.txt
 python manage.py runserver
 ```
+### Docker
+
+#### Client
+
+Create the image and start the docker container:
+
+```bash
+cd warehouse_project_client
+sudo docker build -t warehouse_project_client .
+sudo docker run -it -p 3000:3000 warehouse_project_client
+```
+
+#### Server
+
+Create the image and start the docker container:
+
+```bash
+cd warehouse_project_server
+sudo docker build -t warehouse_project_server .
+sudo docker run -p 8000:8000 warehouse_project_server
+```
+
