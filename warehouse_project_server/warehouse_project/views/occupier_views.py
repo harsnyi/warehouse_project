@@ -101,9 +101,11 @@ class DeleteOccupierView(APIView):
 class UploadExcelView(APIView):
     def post(self, request):
         found_occupiers = []
+        print("asd1")
         excel_file = request.FILES.get('file')
+       
         df = pd.read_excel(excel_file)
-        
+        print("asd2")
         for _, row in df.iterrows():
             for occupier in Occupier.objects.all():
                 if not pd.isna(row['Partner elnevezése']) and  (occupier.occupier_name.lower() == row['Partner elnevezése'].lower()):
