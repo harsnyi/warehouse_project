@@ -36,9 +36,19 @@ function AddOccupier(){
             setPaymentMethod("");
             setDebt("");
         })
-        .catch(function (e) {
-            console.error("Error adding occupier:", e);
-            setResponse("Sikertelen hozzáadás!")
+        .catch(function (error) {
+            if (error.response) {
+               
+                console.error("Server responded with an error status:", error.response.status);
+                console.error("Error details:", error.response.data);
+            } else if (error.request) {
+            
+                console.error("No response received from the server.");
+            } else {
+            
+                console.error("Error setting up the request:", error.message);
+            }
+            setResponse("Sikertelen hozzáadás!");
         });
     }
     
